@@ -34,21 +34,26 @@ void MyBag::subMenu()
             }break;
             case 'B': 
             {
-                int insertInt = inputInteger("Enter a value and insert into MyBag: ");
+                int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
                 myBag.push_back(insertInt);
             }break;
             case 'C':
             { 
-                int i;
-                int find = inputInteger("Enter a value to search from MyBag: ");
-                for (i = 0; i < myBag.size(); i++)
+                int find = inputInteger("\nEnter a value to search from MyBag: ");
+                for (int i = 0; i < myBag.size(); i++)
                 {
                     find = i;
                     //cout << myBag.at(i);
                 }
 
-                i = find;
-                cout << myBag.at(find) << " is at index: " << myBag.at(i);
+                if (myBag.at(find) != find)
+                {
+                    cout << "\nThe number you entered is not in the bag.\n";
+                }
+                else
+                {
+                    cout << endl << myBag.at(find) << " is at index: " << find << endl;
+                }
                 
             }break;
             case 'D':
