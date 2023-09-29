@@ -7,8 +7,7 @@ using namespace std;
 char inputChar(string prompt, string options);
 void mainMenu();
 int inputInteger(string prompt);
-
-//int inputInteger(string prompt, int startRange, int endRange);
+int inputInteger(string prompt, int startRange, int endRange);
 
 class MyBag
 {

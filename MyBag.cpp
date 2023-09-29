@@ -6,7 +6,6 @@ void MyBag::subMenu()
     do
     {
         system("cls");
-
         cout << endl;
         cout << "\t1> Non-template MyBag of integers" << endl;
         cout << "\t" << string(80, char(205)) << endl;
@@ -22,7 +21,7 @@ void MyBag::subMenu()
 
         // get user input/option of main menu
         char option = inputChar("\n\tOption: ", "0ABCDEF");
-        
+
         switch (option)
         {
             case '0': system("cls"); mainMenu();
@@ -31,7 +30,7 @@ void MyBag::subMenu()
                 myBag.clear();
             
                 cout << "My bag is cleared of all elements.\n";
-            }break;
+            }system("pause"); system("cls"); break;
             case 'B': 
             {
                 int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
@@ -48,7 +47,6 @@ void MyBag::subMenu()
                     {
                         found = true;
                         cout << "\n" << findValue << " is at index: " << i << endl;
-                        break;  // Exit the loop once the value is found
                     }
                 }
 
@@ -57,38 +55,40 @@ void MyBag::subMenu()
                     cout << "\nThe number you entered is not in the bag.\n";
                 }
                 
-            }break;
+            }system("pause"); system("cls"); break;
             case 'D':
             {
-                int index = inputInteger("Enter an index to erase: ");
-                if (!index)
+                int index = inputInteger("\nEnter an index to erase: ",0, 100);
+                cout << endl;
+                if (index < 0 || index >= myBag.size())
                 {
-                    cout << "There is no number at this index.\n";
-                    break;
+                    cout << "Invalid index or index out of range.\n";
                 }
-                myBag.emplace_back(index);
-            }break;
+                else
+                {
+                    myBag.erase(myBag.begin() + index);
+                }
+                
+            }system("pause"); system("cls"); break;
             case 'E':
             {
                 // Use std::sort to sort the vector
                 sort(myBag.begin(), myBag.end());
 
-            }break;
+            }system("pause"); break;
             case 'F':
             {
                 // Print the sorted vector
-                cout << "Sorted Vector: ";
+                cout << "\nSorted Vector: ";
                 for (int num : myBag) {
                     cout << num << " ";
                 }
-                cout << std::endl;
-            }break;
+                cout << endl << endl;
+            }system("pause"); break;
         }
 
         // new line
         cout << "\n";
-
-        system("pause");
 
     } while(true);
 
