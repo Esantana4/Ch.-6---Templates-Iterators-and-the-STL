@@ -9,25 +9,26 @@ void mainMenu();
 int inputInteger(string prompt);
 int inputInteger(string prompt, int startRange, int endRange);
 
+//Pre-Condition: 
+//Post-Condition: 
 class MyBag
 {
 private:
 	vector<int> myBag;
-	int size;
-	int capacity;
+	int* size;
+	int* capacity;
 
 public:
-
-	MyBag();
-	MyBag(int newSize, int newCapacity);
-	~MyBag();
-	void subMenu();
+	MyBag(); // No Argument Constructor
+	MyBag(int newSize, int newCapacity); // Argument Constructor
+	~MyBag(); // Destructor
 	
-	void setSize(int newSize);
-	int getSize();
+	void setSize(int newSize); // Setter(Mutator)
+	int getSize() const; // Getter(Accessor)
 
-	void setCapacity(int newCapacity);
-	int getCapacity();
+	void setCapacity(int newCapacity); // Setter(Mutator)
+	int getCapacity() const; // Getter(Accessor)
 
+	void subMenu(); // Logic and main MyBag function
 };
 

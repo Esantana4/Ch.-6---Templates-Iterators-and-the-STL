@@ -1,44 +1,56 @@
 #include "MyBag.h"
 
+//Pre-Condition: 
+//Post-Condition: 
 MyBag::MyBag()
 {
     size = 0;
     capacity = 0;
 }
 
+//Pre-Condition: 
+//Post-Condition: 
 MyBag::MyBag(int newSize, int newCapacity)
 {
-    size = newSize;
-    capacity = newSize;
+    *size = newSize;
+    *capacity = newSize;
 }
 
+//Pre-Condition: 
+//Post-Condition: 
 void MyBag::setSize(int newSize)
 {
-    size = newSize;
+    *size = newSize;
 }
 
-int MyBag::getSize()
+//Pre-Condition: 
+//Post-Condition: 
+int MyBag::getSize() const
 {
-    size = myBag.size();
-    return size;
-    //return myBag.size();
+    return *size;
 }
 
+//Pre-Condition: 
+//Post-Condition: 
 void MyBag::setCapacity(int newCapacity)
 {
-    capacity = newCapacity;
+    *capacity = newCapacity;
 }
 
-int MyBag::getCapacity()
+//Pre-Condition: 
+//Post-Condition: 
+int MyBag::getCapacity() const
 {
-    capacity = myBag.capacity();
-    return capacity;
-    //return myBag.capacity();
+    return *capacity;
 }
 
+//Pre-Condition: 
+//Post-Condition: 
 MyBag::~MyBag()
 {}
 
+//Pre-Condition: 
+//Post-Condition: 
 void MyBag::subMenu()
 {
 
@@ -128,6 +140,10 @@ void MyBag::subMenu()
                     cout << endl << "[" << i << "] - " << myBag[i] << " \n";
                 }
                 cout << endl << endl;
+
+                // ************************* Only For Testing ***********************************
+                //cout << endl << "Size: " << myBag.size() << endl;
+                //cout << endl << "Capacity: " << myBag.capacity() << endl;
 
             }system("pause"); break;
             default:
