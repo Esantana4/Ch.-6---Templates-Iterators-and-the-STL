@@ -19,7 +19,9 @@ void MyBag::setSize(int newSize)
 
 int MyBag::getSize()
 {
-    return myBag.size();
+    size = myBag.size();
+    return size;
+    //return myBag.size();
 }
 
 void MyBag::setCapacity(int newCapacity)
@@ -29,7 +31,9 @@ void MyBag::setCapacity(int newCapacity)
 
 int MyBag::getCapacity()
 {
-    return myBag.capacity();
+    capacity = myBag.capacity();
+    return capacity;
+    //return myBag.capacity();
 }
 
 MyBag::~MyBag()
