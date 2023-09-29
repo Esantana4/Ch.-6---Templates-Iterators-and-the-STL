@@ -9,7 +9,7 @@
  Part 3: Application using MyBag container - Otoniel Torres Bernal
 
  Description:
- Part 1: This class uses a vector of integers to mimick a bag that grows and shrinks. MyBag can also be sorted, and searched through using an index.
+ Part 1: This class uses a vector of integers to mimick a bag that grows and shrinks. MyBag can also be sorted, and searched through using the subscript.
  Part 2:
  Part 3:
  */
