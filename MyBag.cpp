@@ -39,20 +39,22 @@ void MyBag::subMenu()
             }break;
             case 'C':
             { 
-                int find = inputInteger("\nEnter a value to search from MyBag: ");
+                int findValue = inputInteger("\nEnter a value to search from MyBag: ");
+                bool found = false;
+
                 for (int i = 0; i < myBag.size(); i++)
                 {
-                    find = i;
-                    //cout << myBag.at(i);
+                    if (myBag.at(i) == findValue)
+                    {
+                        found = true;
+                        cout << "\n" << findValue << " is at index: " << i << endl;
+                        break;  // Exit the loop once the value is found
+                    }
                 }
 
-                if (myBag.at(find) != find)
+                if (!found)
                 {
                     cout << "\nThe number you entered is not in the bag.\n";
-                }
-                else
-                {
-                    cout << endl << myBag.at(find) << " is at index: " << find << endl;
                 }
                 
             }break;
