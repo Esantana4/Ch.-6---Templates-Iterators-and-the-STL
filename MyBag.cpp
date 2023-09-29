@@ -1,59 +1,60 @@
 #include "MyBag.h"
 
-//Pre-Condition: 
-//Post-Condition: 
+// Credit: Erik Santana
+
+//Pre-Condition: No parameters.
+//Post-Condition: No return. Initializer Constructor
 MyBag::MyBag()
 {
     size = 0;
     capacity = 0;
 }
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: Parameters - int newSize, int newCapacity
+//Post-Condition: No return. Argument Constructor.
 MyBag::MyBag(int newSize, int newCapacity)
 {
     *size = newSize;
     *capacity = newSize;
 }
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: Parameter - int newSize
+//Post-Condition: No return. Setter mutates *size.
 void MyBag::setSize(int newSize)
 {
     *size = newSize;
 }
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: No parameters.
+//Post-Condition: Returns *size. Getter only accesses *size.
 int MyBag::getSize() const
 {
     return *size;
 }
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: Parameter - int newCapacity
+//Post-Condition: No return. Setter mutates *capacity.
 void MyBag::setCapacity(int newCapacity)
 {
     *capacity = newCapacity;
 }
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: No parameters.
+//Post-Condition: Returns *capacity. Getter only accesses *capacity.
 int MyBag::getCapacity() const
 {
     return *capacity;
 }
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: No paremters.
+//Post-Condition: No return. Destructor.
 MyBag::~MyBag()
 {}
 
-//Pre-Condition: 
-//Post-Condition: 
+//Pre-Condition: No parameters.
+//Post-Condition: No return. Logic and main MyBag function with menu.
 void MyBag::subMenu()
 {
-
     do
     {
         system("cls");

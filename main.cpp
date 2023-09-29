@@ -3,15 +3,15 @@
  10/4/23
  CPMR 131 - Professor Q
 
- Description:
- Part 1: Complex Numbers - This class multiplies, divides, adds, subtracts 2 complex numbers. This class also checks if 2 complex numbers are equal or not.
- Part 2: 
- Part 3: 
-
  Credit:
- Part 1: Complex Numbers - Joe Bryant & Erik Santana & Christian Hernandez
- Part 2:  - Thanh Tran & John Kim
- Part 3:  - Otoniel Torres Bernal & Saul Merino
+ Part 1: Non-template MyBag container of int - Erik Santana
+ Part 2: Template MyBag<double> container - Thanh Tran
+ Part 3: Application using MyBag container - Otoniel Torres Bernal
+
+ Description:
+ Part 1: This class uses a vector of integers to mimick a bag that grows and shrinks. MyBag can also be sorted, and searched through using an index.
+ Part 2:
+ Part 3:
  */
 
 //#include 
