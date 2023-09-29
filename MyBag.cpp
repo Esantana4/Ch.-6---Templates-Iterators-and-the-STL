@@ -48,37 +48,37 @@ void MyBag::subMenu()
         cout << endl;
         cout << "\t1> Non-template MyBag of integers" << endl;
         cout << "\t" << string(80, char(205)) << endl;
-        cout << "\t\tA> clear" << endl;
-        cout << "\t\tB> insert" << endl;
-        cout << "\t\tC> search" << endl;
-        cout << "\t\tD> remove" << endl;
-        cout << "\t\tE> sort" << endl;
-        cout << "\t\tF> display" << endl;
+        cout << "\t\t1> clear" << endl;
+        cout << "\t\t2> insert" << endl;
+        cout << "\t\t3> search" << endl;
+        cout << "\t\t4> remove" << endl;
+        cout << "\t\t5> sort" << endl;
+        cout << "\t\t6> display" << endl;
         cout << "\n\t" << string(80, char(169));
         cout << "\n\t0 > exit" << endl;
         cout << "\t" << string(80, char(205)) << endl;
 
         // get user input/option of main menu
-        char option = inputChar("\n\tOption: ", "0ABCDEF");
+        int option = inputInteger("\n\tOption: ", 1,6);
 
         switch (option)
         {
         case '0': system("cls"); mainMenu(); break;
-            case 'A': 
+            case 1: 
             {
                 myBag.clear();
-            
                 cout << "\nMy bag is cleared of all elements.\n";
-                cout << endl << "The size of the bag is: " << getSize() << endl << endl;
+
             }system("pause"); system("cls"); break;
-            case 'B': 
+            case 2: 
             {
                 int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
                 myBag.push_back(insertInt);
+
+                cout << insertInt << " has been inserted into MyBag.\n\n";
             }break;
-            case 'C':
+            case 3:
             { 
-                cout << endl << "The size of the bag is: " << getSize() << endl << endl;
                 int findValue = inputInteger("\nEnter a value to search from MyBag: ");
                 bool found = false;
 
@@ -87,23 +87,23 @@ void MyBag::subMenu()
                     if (myBag.at(i) == findValue)
                     {
                         found = true;
-                        cout << "\n" << findValue << " is at index: " << i << endl;
+                        cout << "\nValue " << findValue << " is at found at subscript #" << i << endl;
                     }
                 }
 
                 if (!found)
                 {
-                    cout << "\nThe number you entered is not in the bag.\n";
+                    cout << "\nValue " << findValue << " is not in MyBag.\n\n";
                 }
                 
             }system("pause"); system("cls"); break;
-            case 'D':
+            case 4:
             {
-                int index = inputInteger("\nEnter an index to erase: ",0, 100);
+                int index = inputInteger("\nEnter an index to be deleted: ", 0, myBag.size() - 1);
                 cout << endl;
                 if (index < 0 || index >= myBag.size())
                 {
-                    cout << "Invalid index or index out of range.\n";
+                    cout << "Invalid index or index out of range.\n\n";
                 }
                 else
                 {
@@ -111,23 +111,24 @@ void MyBag::subMenu()
                 }
                 
             }system("pause"); system("cls"); break;
-            case 'E':
+            case 5:
             {
                 // sort the vector
                 sort(myBag.begin(), myBag.end());
 
+                cout << "\nMyBag has been sorted.\n\n";
+
             }system("pause"); break;
-            case 'F':
+            case 6:
             {
-                // Print the sorted vector
-                cout << "\nSorted Vector: ";
-                for (int num : myBag) {
-                    cout << num << " ";
+                cout << "\nMyBag:\n ";
+
+                for (int i = 0; i < myBag.size(); i++)
+                {
+                    cout << endl << "[" << i << "] - " << myBag[i] << " \n";
                 }
                 cout << endl << endl;
 
-                cout << endl << "The size of the bag is: " << getSize() << endl;
-                cout << endl << "The capacity of the bag is: " << getCapacity() << endl << endl;
             }system("pause"); break;
             default:
                 cout << "Invalid option. Please enter a valid option.\n";
