@@ -2,8 +2,8 @@
 
 MyBag::MyBag()
 {
-    size = myBag.size();
-    capacity = myBag.capacity();
+    size = 0;
+    capacity = 0;
 }
 
 MyBag::MyBag(int newSize, int newCapacity)
