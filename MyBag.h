@@ -13,11 +13,21 @@ class MyBag
 {
 private:
 	vector<int> myBag;
+	int size;
+	int capacity;
 
 public:
 
+	MyBag();
+	MyBag(int newSize, int newCapacity);
+	~MyBag();
 	void subMenu();
-	//void clear();
+	
+	void setSize(int newSize);
+	int getSize();
+
+	void setCapacity(int newCapacity);
+	int getCapacity();
 
 };
 

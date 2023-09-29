@@ -1,5 +1,40 @@
 #include "MyBag.h"
 
+MyBag::MyBag()
+{
+    size = myBag.size();
+    capacity = myBag.capacity();
+}
+
+MyBag::MyBag(int newSize, int newCapacity)
+{
+    size = newSize;
+    capacity = newSize;
+}
+
+void MyBag::setSize(int newSize)
+{
+    size = newSize;
+}
+
+int MyBag::getSize()
+{
+    return myBag.size();
+}
+
+void MyBag::setCapacity(int newCapacity)
+{
+    capacity = newCapacity;
+}
+
+int MyBag::getCapacity()
+{
+    return myBag.capacity();
+}
+
+MyBag::~MyBag()
+{}
+
 void MyBag::subMenu()
 {
 
@@ -24,12 +59,13 @@ void MyBag::subMenu()
 
         switch (option)
         {
-            case '0': system("cls"); mainMenu();
+        case '0': system("cls"); mainMenu(); break;
             case 'A': 
             {
                 myBag.clear();
             
-                cout << "My bag is cleared of all elements.\n";
+                cout << "\nMy bag is cleared of all elements.\n";
+                cout << endl << "The size of the bag is: " << getSize() << endl << endl;
             }system("pause"); system("cls"); break;
             case 'B': 
             {
@@ -38,10 +74,11 @@ void MyBag::subMenu()
             }break;
             case 'C':
             { 
+                cout << endl << "The size of the bag is: " << getSize() << endl << endl;
                 int findValue = inputInteger("\nEnter a value to search from MyBag: ");
                 bool found = false;
 
-                for (int i = 0; i < myBag.size(); i++)
+                for (int i = 0; i < getSize(); i++)
                 {
                     if (myBag.at(i) == findValue)
                     {
@@ -72,7 +109,7 @@ void MyBag::subMenu()
             }system("pause"); system("cls"); break;
             case 'E':
             {
-                // Use std::sort to sort the vector
+                // sort the vector
                 sort(myBag.begin(), myBag.end());
 
             }system("pause"); break;
@@ -84,7 +121,12 @@ void MyBag::subMenu()
                     cout << num << " ";
                 }
                 cout << endl << endl;
+
+                cout << endl << "The size of the bag is: " << getSize() << endl;
+                cout << endl << "The capacity of the bag is: " << getCapacity() << endl << endl;
             }system("pause"); break;
+            default:
+                cout << "Invalid option. Please enter a valid option.\n";
         }
 
         // new line
