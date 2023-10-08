@@ -12,7 +12,7 @@ MyBag::MyBag()
 
 //Pre-Condition: Parameters - int newSize, int newCapacity
 //Post-Condition: No return. Argument Constructor.
-MyBag::MyBag(int &newSize, int &newCapacity)
+MyBag::MyBag(int newSize, int newCapacity)
 {
     *size = newSize;
     *capacity = newCapacity;
@@ -20,7 +20,7 @@ MyBag::MyBag(int &newSize, int &newCapacity)
 
 //Pre-Condition: Parameter - int newSize
 //Post-Condition: No return. Setter mutates *size.
-void MyBag::setSize(int &newSize)
+void MyBag::setSize(int newSize)
 {
     *size = newSize;
 }
@@ -34,7 +34,7 @@ int MyBag::getSize() const
 
 //Pre-Condition: Parameter - int newCapacity
 //Post-Condition: No return. Setter mutates *capacity.
-void MyBag::setCapacity(int &newCapacity)
+void MyBag::setCapacity(int newCapacity)
 {
     *capacity = newCapacity;
 }
@@ -52,7 +52,7 @@ MyBag::~MyBag()
 {}
 
 //Pre-Condition: No parameters.
-//Post-Condition: No return. Logic and main MyBag function with menu.
+//Post-Condition: No return. Logic and main MyBag function with a menu.
 void MyBag::subMenu()
 {
     do
@@ -86,7 +86,7 @@ void MyBag::subMenu()
                 cout << "\nMy bag is cleared of all elements.\n\n";
 
             }break;
-            case 2: // Add a value to MyBag
+            case 2: // Insert a value to MyBag
             {
                 int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
                 myBag.push_back(insertInt);
@@ -135,7 +135,7 @@ void MyBag::subMenu()
 
                 cout << "\nMyBag has been sorted.\n\n";
 
-            }system("pause"); break;
+            }break;
             case 6: // Display
             {
                 cout << "\nMyBag:\n ";
@@ -146,17 +146,15 @@ void MyBag::subMenu()
                 }
                 cout << endl << endl;
 
-                // ************************* Only For Testing ***********************************
-                //cout << endl << "Size: " << myBag.size() << endl;
-                //cout << endl << "Capacity: " << myBag.capacity() << endl;
-
             }break;
             default:
                 cout << "Invalid option. Please enter a valid option.\n";
         }
 
+        // Pause display after every case
         system("pause");
-        // new line
+
+        // New line
         cout << "\n";
 
     } while(true);

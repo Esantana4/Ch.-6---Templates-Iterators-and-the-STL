@@ -22,13 +22,13 @@ private:
 
 public:
 	MyBag(); // No Argument Constructor
-	MyBag(int &newSize, int &newCapacity); // Argument Constructor
+	MyBag(int newSize, int newCapacity); // Argument Constructor
 	~MyBag(); // Destructor
 	
-	void setSize(int &newSize); // Setter(Mutator)
+	void setSize(int newSize); // Setter(Mutator)
 	int getSize() const; // Getter(Accessor)
 
-	void setCapacity(int &newCapacity); // Setter(Mutator)
+	void setCapacity(int newCapacity); // Setter(Mutator)
 	int getCapacity() const; // Getter(Accessor)
 
 	void subMenu(); // Logic and main MyBag function with menu.
