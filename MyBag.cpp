@@ -12,15 +12,15 @@ MyBag::MyBag()
 
 //Pre-Condition: Parameters - int newSize, int newCapacity
 //Post-Condition: No return. Argument Constructor.
-MyBag::MyBag(int newSize, int newCapacity)
+MyBag::MyBag(int &newSize, int &newCapacity)
 {
     *size = newSize;
-    *capacity = newSize;
+    *capacity = newCapacity;
 }
 
 //Pre-Condition: Parameter - int newSize
 //Post-Condition: No return. Setter mutates *size.
-void MyBag::setSize(int newSize)
+void MyBag::setSize(int &newSize)
 {
     *size = newSize;
 }
@@ -34,7 +34,7 @@ int MyBag::getSize() const
 
 //Pre-Condition: Parameter - int newCapacity
 //Post-Condition: No return. Setter mutates *capacity.
-void MyBag::setCapacity(int newCapacity)
+void MyBag::setCapacity(int &newCapacity)
 {
     *capacity = newCapacity;
 }
@@ -95,7 +95,7 @@ void MyBag::subMenu()
                 int findValue = inputInteger("\nEnter a value to search from MyBag: ");
                 bool found = false;
 
-                for (int i = 0; i < getSize(); i++)
+                for (int i = 0; i < myBag.size(); i++)
                 {
                     if (myBag.at(i) == findValue)
                     {
