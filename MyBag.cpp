@@ -83,15 +83,15 @@ void MyBag::subMenu()
             case 1: 
             {
                 myBag.clear();
-                cout << "\nMy bag is cleared of all elements.\n";
+                cout << "\nMy bag is cleared of all elements.\n\n";
 
-            }system("pause"); system("cls"); break;
+            }break;
             case 2: 
             {
                 int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
                 myBag.push_back(insertInt);
 
-                cout << insertInt << " has been inserted into MyBag.\n\n";
+                cout << endl << insertInt << " has been inserted into MyBag.\n\n";
             }break;
             case 3:
             { 
@@ -124,9 +124,10 @@ void MyBag::subMenu()
                 else
                 {
                     myBag.erase(myBag.begin() + index);
+                    cout << "Subscript " << index << " has been deleted.\n\n";
                 }
                 
-            }system("pause"); system("cls"); break;
+            }break;
             case 5:
             {
                 // sort the vector
@@ -154,6 +155,7 @@ void MyBag::subMenu()
                 cout << "Invalid option. Please enter a valid option.\n";
         }
 
+        system("pause");
         // new line
         cout << "\n";
 
