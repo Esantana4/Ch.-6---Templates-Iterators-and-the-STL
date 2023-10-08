@@ -72,11 +72,14 @@ void MyBag::subMenu()
         cout << "\t" << string(80, char(205)) << endl;
 
         // get user input/option of main menu
-        int option = inputInteger("\n\tOption: ", 1,6);
+        int option = inputInteger("\n\tOption: ", 0,6);
 
         switch (option)
         {
-        case '0': system("cls"); mainMenu(); break;
+            case 0: 
+            {
+                system("cls"); mainMenu(); 
+            }break;
             case 1: 
             {
                 myBag.clear();
