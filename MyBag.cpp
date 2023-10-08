@@ -76,24 +76,24 @@ void MyBag::subMenu()
 
         switch (option)
         {
-            case 0: 
+            case 0: // Return to Main Menu
             {
                 system("cls"); mainMenu(); 
             }break;
-            case 1: 
+            case 1: // Clear MyBag
             {
                 myBag.clear();
                 cout << "\nMy bag is cleared of all elements.\n\n";
 
             }break;
-            case 2: 
+            case 2: // Add a value to MyBag
             {
                 int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
                 myBag.push_back(insertInt);
 
                 cout << endl << insertInt << " has been inserted into MyBag.\n\n";
             }break;
-            case 3:
+            case 3: // Search
             { 
                 int findValue = inputInteger("\nEnter a value to search from MyBag: ");
                 bool found = false;
@@ -103,7 +103,7 @@ void MyBag::subMenu()
                     if (myBag.at(i) == findValue)
                     {
                         found = true;
-                        cout << "\nValue " << findValue << " is at found at subscript #" << i << endl;
+                        cout << "\nValue " << findValue << " is at found at subscript #" << i << endl << endl;
                     }
                 }
 
@@ -112,8 +112,8 @@ void MyBag::subMenu()
                     cout << "\nValue " << findValue << " is not in MyBag.\n\n";
                 }
                 
-            }system("pause"); system("cls"); break;
-            case 4:
+            }break;
+            case 4: // Remove an element at index
             {
                 int index = inputInteger("\nEnter an index to be deleted: ", 0, myBag.size() - 1);
                 cout << endl;
@@ -128,7 +128,7 @@ void MyBag::subMenu()
                 }
                 
             }break;
-            case 5:
+            case 5: // Sort
             {
                 // sort the vector
                 sort(myBag.begin(), myBag.end());
@@ -136,7 +136,7 @@ void MyBag::subMenu()
                 cout << "\nMyBag has been sorted.\n\n";
 
             }system("pause"); break;
-            case 6:
+            case 6: // Display
             {
                 cout << "\nMyBag:\n ";
 
@@ -150,7 +150,7 @@ void MyBag::subMenu()
                 //cout << endl << "Size: " << myBag.size() << endl;
                 //cout << endl << "Capacity: " << myBag.capacity() << endl;
 
-            }system("pause"); break;
+            }break;
             default:
                 cout << "Invalid option. Please enter a valid option.\n";
         }
