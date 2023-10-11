@@ -14,36 +14,36 @@ MyBag::MyBag()
 //Post-Condition: No return. Argument Constructor.
 MyBag::MyBag(int newSize, int newCapacity)
 {
-    *size = newSize;
-    *capacity = newCapacity;
+    size = newSize;
+    capacity = newCapacity;
 }
 
 //Pre-Condition: Parameter - int newSize
 //Post-Condition: No return. Setter mutates *size.
 void MyBag::setSize(int newSize)
 {
-    *size = newSize;
+    size = newSize;
 }
 
 //Pre-Condition: No parameters.
 //Post-Condition: Returns *size. Getter only accesses *size.
 int MyBag::getSize() const
 {
-    return *size;
+    return size;
 }
 
 //Pre-Condition: Parameter - int newCapacity
 //Post-Condition: No return. Setter mutates *capacity.
 void MyBag::setCapacity(int newCapacity)
 {
-    *capacity = newCapacity;
+    capacity = newCapacity;
 }
 
 //Pre-Condition: No parameters.
 //Post-Condition: Returns *capacity. Getter only accesses *capacity.
 int MyBag::getCapacity() const
 {
-    return *capacity;
+    return capacity;
 }
 
 //Pre-Condition: No paremters.
