@@ -49,7 +49,10 @@ int MyBag::getCapacity() const
 //Pre-Condition: No paremters.
 //Post-Condition: No return. Destructor.
 MyBag::~MyBag()
-{}
+{
+    newValue = nullptr;
+    delete [] newValue;
+}
 
 //Pre-Condition: No parameters.
 //Post-Condition: No return. Logic and main MyBag function with a menu.
@@ -72,83 +75,83 @@ void MyBag::subMenu()
         cout << "\t" << string(80, char(205)) << endl;
 
         // get user input/option of main menu
-        int option = inputInteger("\n\tOption: ", 0,6);
+        int option = inputInteger("\n\tOption: ", 0, 6);
 
         switch (option)
         {
-            case 0: // Return to Main Menu
-            {
-                system("cls"); mainMenu(); 
-            }break;
-            case 1: // Clear MyBag
-            {
-                myBag.clear();
-                cout << "\nMy bag is cleared of all elements.\n\n";
+        case 0: // Return to Main Menu
+        {
+            system("cls"); mainMenu();
+        }break;
+        case 1: // Clear MyBag
+        {
+            myBag.clear();
+            cout << "\nMy bag is cleared of all elements.\n\n";
 
-            }break;
-            case 2: // Insert a value to MyBag
+        }break;
+        case 2: // Insert a value to MyBag
+        {
+            *newValue = inputInteger("\nEnter a value and insert into MyBag: ");
+            myBag.push_back(*newValue);
+
+            cout << endl << *newValue << " has been inserted into MyBag.\n\n";
+        }break;
+        case 3: // Search
+        {
+            int findValue = inputInteger("\nEnter a value to search from MyBag: ");
+            bool found = false;
+
+            for (int i = 0; i < myBag.size(); i++)
             {
-                int insertInt = inputInteger("\nEnter a value and insert into MyBag: ");
-                myBag.push_back(insertInt);
-
-                cout << endl << insertInt << " has been inserted into MyBag.\n\n";
-            }break;
-            case 3: // Search
-            { 
-                int findValue = inputInteger("\nEnter a value to search from MyBag: ");
-                bool found = false;
-
-                for (int i = 0; i < myBag.size(); i++)
+                if (myBag.at(i) == findValue)
                 {
-                    if (myBag.at(i) == findValue)
-                    {
-                        found = true;
-                        cout << "\nValue " << findValue << " is at found at subscript #" << i << endl << endl;
-                    }
+                    found = true;
+                    cout << "\nValue " << findValue << " is at found at subscript #" << i << endl << endl;
                 }
+            }
 
-                if (!found)
-                {
-                    cout << "\nValue " << findValue << " is not in MyBag.\n\n";
-                }
-                
-            }break;
-            case 4: // Remove an element at index
+            if (!found)
             {
-                int index = inputInteger("\nEnter an index to be deleted: ", 0, myBag.size() - 1);
-                cout << endl;
-                if (index < 0 || index >= myBag.size())
-                {
-                    cout << "Invalid index or index out of range.\n\n";
-                }
-                else
-                {
-                    myBag.erase(myBag.begin() + index);
-                    cout << "Subscript " << index << " has been deleted.\n\n";
-                }
-                
-            }break;
-            case 5: // Sort
+                cout << "\nValue " << findValue << " is not in MyBag.\n\n";
+            }
+
+        }break;
+        case 4: // Remove an element at index
+        {
+            int index = inputInteger("\nEnter an index to be deleted: ", 0, myBag.size() - 1);
+            cout << endl;
+            if (index < 0 || index >= myBag.size())
             {
-                // sort the vector
-                sort(myBag.begin(), myBag.end());
-
-                cout << "\nMyBag has been sorted.\n\n";
-
-            }break;
-            case 6: // Display
+                cout << "Invalid index or index out of range.\n\n";
+            }
+            else
             {
-                cout << "\nMyBag:\n ";
+                myBag.erase(myBag.begin() + index);
+                cout << "Subscript " << index << " has been deleted.\n\n";
+            }
 
-                for (int i = 0; i < myBag.size(); i++)
-                {
-                    cout << endl << "[" << i << "] - " << myBag[i] << " \n";
-                }
-                cout << endl << endl;
+        }break;
+        case 5: // Sort
+        {
+            // sort the vector
+            sort(myBag.begin(), myBag.end());
 
-            }break;
-            default:
-                cout << "Invalid option. Please enter a valid option.\n";
+            cout << "\nMyBag has been sorted.\n\n";
+
+        }break;
+        case 6: // Display
+        {
+            cout << "\nMyBag:\n ";
+
+            for (int i = 0; i < myBag.size(); i++)
+            {
+                cout << endl << "[" << i << "] - " << myBag[i] << " \n";
+            }
+            cout << endl << endl;
+
+        }break;
+        default:
+            cout << "Invalid option. Please enter a valid option.\n";
         }
 
         // Pause display after every case
@@ -157,6 +160,6 @@ void MyBag::subMenu()
         // New line
         cout << "\n";
 
-    } while(true);
+    } while (true);
 
 }

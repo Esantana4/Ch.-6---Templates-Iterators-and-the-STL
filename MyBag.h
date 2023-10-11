@@ -17,8 +17,9 @@ class MyBag
 {
 private:
 	vector<int> myBag;
-	int* size;
-	int* capacity;
+	int* newValue = new int[myBag.size()];
+	int *size;
+	int *capacity;
 
 public:
 	MyBag(); // No Argument Constructor
