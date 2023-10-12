@@ -225,7 +225,46 @@ void Course::menuInformation() {
 			}
 		}
 			  break;
-		case 4: {
+		case 4: 
+		{
+
+			//if the file is empty , error
+			if (courses.empty()) {
+				cout << "\n\t\t\tERROR: No data file has been read and stored into Courses.\n";
+				break;
+			}
+			int removeId = inputInteger("\n\t\tEnter the student ID to remove: ");
+			int index = 0;
+			bool studentFound = false;
+
+			for (int i = 0; i < courses.size(); i++) {
+				if (courses[i].getStudentIDs().searchMyBag(removeId)) {
+					studentFound = true;
+					index = i;
+				}
+			}
+
+			if (!studentFound) {
+				cout << "\n\t\tNo student ID: " << removeId << " found.\n";
+				break;
+			}
+			for (Course& course : courses) {
+				course.removeStudent(removeId);
+			}
+
+			cout << "\n\t\tStudent with ID " << removeId << " removed from all courses.\n";
+
+			// logic error remove element for a vector 
+
+			//for (int i = courses.size() - 1; i >= 0; i--) 
+			//{
+			//	if (courses[i].getNumStudents() == 0)
+			//	{
+			//		courses.erase(courses.begin() + i);
+			//	}
+			//}
+			//break;
+
 		}
 			  break;
 		case 5: {

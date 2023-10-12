@@ -7,6 +7,7 @@ char inputChar(string prompt, string options);
 void mainMenu();
 int inputInteger(string prompt);
 int inputInteger(string prompt, int startRange, int endRange);
+double inputDouble(string prompt);
 
 template <typename T>
 class MyBagTemplate;
@@ -20,15 +21,10 @@ private:
 	int capacity;
 public:
 
-	// Functions to interact with the bag
+	//Functions to interact with the bag
 	void add(double value);
-	bool remove(double value);
-	bool isEmpty() const { return size == 0; }
-	int getCurrentSize() const { return size; }
 	void clear();
-	int getFrequencyOf(double value) const;
 	bool contains(double value) const;
-	void display() const;
 	void ensureCapacity(int newCapacity);
 
 	//defualt constructor

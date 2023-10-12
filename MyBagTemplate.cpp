@@ -53,6 +53,7 @@ void MyBagTemplate<T>::insertMyBag(const T& insert) {
     data[size++] = insert;
 }
 
+
 template<typename T>
 bool MyBagTemplate<T>::searchMyBag(const T& search) const {
     for (int i = 0; i < size; ++i) {
@@ -81,7 +82,7 @@ bool MyBagTemplate<T>::removeMyBag(const T& remove) {
     }
     return false;
 }
-
+ 
 template<typename T>
 void MyBagTemplate<T>::sortMyBag() {
     sort(data, data + size);
@@ -147,31 +148,6 @@ void MyBagTemplate<T>::ensureCapacity(int newCapacity) {
 }
 
 template<typename T>
-bool MyBagTemplate<T>::remove(double value) {
-    for (int i = 0; i < size; i++) {
-        if (data[i] == value) {
-            for (int j = i; j < size - 1; j++) {
-                data[j] = data[j + 1];
-            }
-            size--;
-            return true;
-        }
-    }
-    return false;
-}
-
-template<typename T>
-int MyBagTemplate<T>::getFrequencyOf(double value) const {
-    int count = 0;
-    for (int i = 0; i < size; i++) {
-        if (data[i] == value) {
-            count++;
-        }
-    }
-    return count;
-}
-
-template<typename T>
 bool MyBagTemplate<T>::contains(double value) const {
     for (int i = 0; i < size; i++) {
         if (data[i] == value) {
@@ -179,14 +155,6 @@ bool MyBagTemplate<T>::contains(double value) const {
         }
     }
     return false;
-}
-
-template<typename T>
-void MyBagTemplate<T>::display() const {
-    for (int i = 0; i < size; i++) {
-        cout << data[i] << " ";
-    }
-    cout << endl;
 }
 
 template<typename T>
@@ -220,18 +188,31 @@ void MyBagTemplate<T>::subMenu()
         } break;
         case 1: // Clear MyBag
         {
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                break;
+            }
+
             clear();
             cout << "\nMy bag is cleared of all elements.\n\n";
         } break;
         case 2: // Insert a value to MyBag
         {
-            double insertValue = static_cast<double>(inputInteger("\nEnter a value and insert into MyBag: "));
+            double insertValue = (inputDouble("\nEnter a value and insert into MyBag: "));
             add(insertValue);
             cout << "\nValue " << insertValue << " has been inserted into MyBag.\n\n";
         } break;
         case 3: // Search
         {
-            double findValue = static_cast<double>(inputInteger("\nEnter a value to search from MyBag: "));
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                break;
+            }
+
+            double findValue = (inputDouble("\nEnter a value to search from MyBag: "));
+
             bool found = contains(findValue);
 
             if (found) {
@@ -244,6 +225,12 @@ void MyBagTemplate<T>::subMenu()
         } break;
         case 4: // Remove an element at index
         {
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                break;
+            }
+
             int index = inputInteger("\nEnter an index to be deleted: ", 0, size - 1);
             cout << endl;
             if (index < 0 || index >= size)
@@ -262,16 +249,29 @@ void MyBagTemplate<T>::subMenu()
         } break;
         case 5: // Sort
         {
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                break;
+            }
+
             sort(data, data + size);
             cout << "\nMyBag has been sorted.\n\n";
         } break;
         case 6: // Display
         {
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                break;
+            }
+
             cout << "\nMyBag:\n ";
             for (int i = 0; i < size; i++)
             {
                 cout << endl << "[" << i << "] - " << data[i] << " \n";
             }
+
             cout << endl << endl;
         } break;
         default:
