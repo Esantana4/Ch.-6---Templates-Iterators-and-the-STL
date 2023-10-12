@@ -9,13 +9,13 @@ Course::Course(const string& courseName) : name(courseName) {}
 const string& Course::getName() const {
 	return name;
 }
-
 //precondition: going to get the new name
 //postcondition: going to set the private name with the new name member
 void Course::setName(const string newName) {
 	name = newName;
 }
-
+//precondition: going to pass in double that has the score
+//postcondition: going to then do if statements checking the score, return the letter grade
 char Course::calculateGrade(double score) {
 	if (score >= 90.0) return 'A';
 	else if (score >= 80.0) return 'B';
@@ -24,35 +24,37 @@ char Course::calculateGrade(double score) {
 	else return 'F';
 
 }
-
+//precondition: going to pass in the size
+//postcondition: going to return the studentIds (from my bag template) and get the size
 int Course::getNumStudents() const {
 	return studentIDs.getSize();
 }
-
+//precondition: going to pass in an int as the bag template
+//postcondition: going to then return the student Ids numbers
 const MyBagTemplate<int>& Course::getStudentIDs() const {
 	return studentIDs;
 }
-
+//precondition: going to pass in an string as the bag template
+//postcondition: going to then return the strings names
 const MyBagTemplate<string>& Course::getStudentNames() const {
 	return studentNames;
 }
-
+//precondition: going to pass in three parameters
+//postcondition: going to then call my insertMyBag() function , adding each one
 void Course::addStudent(int ID, const string& name, double score) {
 	studentIDs.insertMyBag(ID);
 	studentNames.insertMyBag(name);
 	studentScores.insertMyBag(score);
 	studentGrades.insertMyBag(calculateGrade(score));
 }
-
+//precondition: going to pass in one parameter
+//postcondition: going to then remove a student, removing by ID or student name
 bool Course::removeStudent(int ID) {
-	if (studentIDs.searchMyBag(ID))
-	{
+	if (studentIDs.searchMyBag(ID)) {
 		int index = studentIDs.getSize() - 1;
-		while (studentIDs[index] != ID)
-		{
+		while (studentIDs[index] != ID) {
 			index--;
 		}
-
 		studentIDs[index] = studentIDs[studentIDs.getSize() - 1];
 		studentNames[index] = studentNames[studentNames.getSize() - 1];
 		studentScores[index] = studentScores[studentScores.getSize() - 1];
@@ -67,7 +69,8 @@ bool Course::removeStudent(int ID) {
 	}
 	return false;
 }
-
+//precondition: going to display
+//postcondition: going to return the student information and the course
 void Course::displayCourse() {
 	double sum = 0.0;
 	double average = 0.0;
@@ -84,7 +87,6 @@ void Course::displayCourse() {
 	cout << "\n\n\t\t\tAverage score and grade: " << average << "(" << calculateGrade(average) << ")";
 	cout << '\n';
 }
-
 //precondition: going to print the information
 //postcondition: going to create a menu that accepts 
 void Course::menuInformation() {
@@ -93,9 +95,9 @@ void Course::menuInformation() {
 	vector <Course> courses;
 	int numCourses = 0;
 	string fileName = "";
-
 	do
 	{
+	beginning:
 		system("cls");
 		cout << "\n\t\t 3) Courses using MyBags of integers, strings, doubles, and chars";
 		cout << "\n\t\t" << string(70, char(196));
@@ -122,12 +124,14 @@ void Course::menuInformation() {
 				cout << "\n\t\t\tERROR: number of courses has not been assigned.\n";
 				break;
 			}
+			//clearing the vector so no data is left
+			courses.clear();
 			for (int i = 0; i < numCourses; i++) {
 				while (true) {
-					cout << "\n\t\t\t2> Enter a data file name for course [" << i << "] (STOP - return): ";
-					cin >> fileName;
-					if (fileName == "STOP" || fileName == "stop") {
-						break;
+					fileName = inputString("\n\t\t\t2> Enter a data file name for course[" + to_string(i) + "] (STOP - return): ", false);
+					//IF STOP THEN RETURN TO MENU
+					if (fileName == "STOP") {
+						return;
 					}
 					ifstream file;
 					//open the file
@@ -141,17 +145,17 @@ void Course::menuInformation() {
 						string course_name;
 						getline(file, course_name);
 						courses.push_back(Course(course_name));
-
 						string id;
 						string name;
 						double score;
-
+						//loop while file does not end
 						while (!file.eof()) {
 							getline(file, id, ',');
 							getline(file, name, ',');
 							file >> score;
+							string cleaned_name = removeLeadingTrailingSpaces(name);
 							int ID = stoi(id);
-							courses[i].addStudent(ID, name, score);
+							courses[i].addStudent(ID, cleaned_name, score);
 						}
 						break;
 					}
@@ -161,7 +165,7 @@ void Course::menuInformation() {
 		}
 			  break;
 		case 3: {
-			//if empty error
+			//if the file is empty , error
 			if (courses.empty())
 			{
 				cout << "\n\t\t\tERROR: No data file has been read and stored into Courses.\n";
@@ -173,8 +177,7 @@ void Course::menuInformation() {
 			cout << "\n\t\t\t  2. Name";
 			cout << "\n\t\t\t  0. return";
 			cout << "\n\t\t\t" << string(40, char(196));
-			switch (inputInteger("\n\t\t\tOption: ", 0, 2))
-			{
+			switch (inputInteger("\n\t\t\tOption: ", 0, 2)) {
 			case 1: {
 				//search by Student ID
 				int searchID = inputInteger("\n\t\tEnter the student ID to search: ");
@@ -188,19 +191,16 @@ void Course::menuInformation() {
 					}
 				}
 				if (!studentFound) {
-					cout << "\n\t\tStudent with ID " << searchID << " not found in any course.\n";
+					cout << "\n\t\tNo student ID: " << searchID << " found.\n";
 				}
 				else {
 					cout << "\n\t\tID: " << searchID << " has been found in Course : " << courses[index].getName() << "\n";
 				}
 			}
 				  break;
-
 			case 2: {
-				// Search by Student Name
-				string searchName;// = inputString("\n\t\tEnter the student name to search: ", true);
-				cout << "\n\t\tEnter the student name to search: ";
-				cin >> searchName;
+				//search by Student Name
+				string searchName = inputString("\n\t\tEnter the student name to search: ", true);
 				bool studentFound = false;
 				int index = 0;
 				for (int i = 0; i < courses.size(); i++) {
@@ -211,29 +211,26 @@ void Course::menuInformation() {
 				}
 				//if not found
 				if (!studentFound) {
-					cout << "\n\t\tStudent with name " << searchName << " not found in any course.\n";
+					cout << "\n\t\tNo student name: " << searchName << " found.\n";
 				}
 				else {
 					cout << "\n\t\tID: " << searchName << " has been found in Course : " << courses[index].getName() << "\n";
 				}
 			}
 				  break;
-
 			case 0: {
-				return;
+				goto beginning;
 			}
 			}
 		}
 			  break;
-		case 4: 
-		{
-
+		case 4: {
 			//if the file is empty , error
 			if (courses.empty()) {
 				cout << "\n\t\t\tERROR: No data file has been read and stored into Courses.\n";
 				break;
 			}
-			int removeId = inputInteger("\n\t\tEnter the student ID to remove: ");
+			int removeId = inputInteger("\n\t\t\tEnter the student ID to remove: ");
 			int index = 0;
 			bool studentFound = false;
 
@@ -245,34 +242,19 @@ void Course::menuInformation() {
 			}
 
 			if (!studentFound) {
-				cout << "\n\t\tNo student ID: " << removeId << " found.\n";
+				cout << "\n\t\t\tNo student ID: " << removeId << " found.\n";
 				break;
 			}
 			for (Course& course : courses) {
 				course.removeStudent(removeId);
 			}
 
-			cout << "\n\t\tStudent with ID " << removeId << " removed from all courses.\n";
-
-			// logic error remove element for a vector 
-
-			//for (int i = courses.size() - 1; i >= 0; i--) 
-			//{
-			//	if (courses[i].getNumStudents() == 0)
-			//	{
-			//		courses.erase(courses.begin() + i);
-			//	}
-			//}
-			//break;
+			cout << "\n\t\t\tStudent with ID " << removeId << " removed from all courses.\n";
 
 		}
 			  break;
 		case 5: {
-			/*if (numCourses == 0){
-				cout << "\n\t\t\tERROR: number of courses has not been assigned.\n";
-				break;
-			}*/
-			//if file is empty
+			//if the file is empty , error
 			if (courses.empty()) {
 				cout << "\n\t\t\tERROR: No data file has been read and stored into Courses.\n";
 				break;
@@ -305,7 +287,7 @@ void Course::menuInformation() {
 		}
 			  break;
 		case 0: {
-			system("cls"); mainMenu();
+			return;
 		}
 		}
 		cout << "\n";

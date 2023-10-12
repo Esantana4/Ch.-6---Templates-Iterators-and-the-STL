@@ -3,7 +3,7 @@
 //precondition: going to call my defaults constructor
 //postcondition: going to initialize them and passing in the template
 template<typename T>
-MyBagTemplate<T>::MyBagTemplate() : data(nullptr), size(0), capacity(0) {}
+MyBagTemplate<T>::MyBagTemplate() :data(nullptr), size(0), capacity(0) {}
 //precondition: going to call my constructor
 //postcondition: going to be allocating new to the data and newCapacity with size using templates
 template<typename T>
@@ -27,12 +27,78 @@ template<typename T>
 void MyBagTemplate<T>::setSize(int newSize) {
     size = newSize;
 }
+//precondition: going to call the myBag (template)
+//postcondition: going to then clear the myBag (make it empty)
+template<typename T>
+void MyBagTemplate<T>::clearMyBag() {
+    delete[] data;
+    data = nullptr;
+    size = 0;
+    capacity = 0;
+}
+//precondition: going to call the myBag (template)
+//postcondition: going to then insert to the myBag (return the value)
+template<typename T>
+void MyBagTemplate<T>::insertMyBag(const T& insert) {
+    if (size >= capacity) {
+        int newCapacity = (capacity == 0) ? 1 : capacity * 2;
+        T* newData = new T[newCapacity];
 
+        for (int i = 0; i < size; ++i) {
+            newData[i] = data[i];
+        }
+        //deallocate the memory so it does not leak
+        delete[] data;
+        data = newData;
+        capacity = newCapacity;
+    }
+    data[size++] = insert;
+}
+//precondition: going to call the myBag (template)
+//postcondition: going to then search the myBag (return the value if found)
+template<typename T>
+bool MyBagTemplate<T>::searchMyBag(const T& search) const {
+    for (int i = 0; i < size; ++i) {
+        if (data[i] == search) {
+            return true;
+        }
+    }
+    return false;
+}
+//precondition: going to call the myBag (template)
+//postcondition: going to then remove the myBag (return the value and remove it)
+template<typename T>
+bool MyBagTemplate<T>::removeMyBag(const T& remove) {
+    int index = -1;
+    for (int i = 0; i < size; ++i) {
+        if (data[i] == remove) {
+            index = i;
+            break;
+        }
+    }
+    if (index != -1) {
+        for (int i = index; i < size - 1; ++i) {
+            data[i] = data[i + 1];
+        }
+        size--;
+        return true;
+    }
+    return false;
+}
+//precondition: going to call the myBag (template)
+//postcondition: going to then search the myBag (return the values in sorted form)
+template<typename T>
+void MyBagTemplate<T>::sortMyBag() {
+    sort(data, data + size);
+}
+//precondition: going to call the myBag (template)
+//postcondition: going to then overload the < operator
 template<typename T>
 bool MyBagTemplate<T>::operator<(const MyBagTemplate<T>& obj) const {
     return size < obj.size;
 }
-
+//precondition: going to call the myBag (template)
+//postcondition: going to then overload the [] operator
 template<typename T>
 T& MyBagTemplate<T>::operator[](int index) {
     if (index < 0 || index >= size) {
@@ -40,7 +106,8 @@ T& MyBagTemplate<T>::operator[](int index) {
     }
     return data[index];
 }
-
+//precondition: going to call the myBag (template)
+//postcondition: going to then overload the [] operator for the size
 template<typename T>
 const T& MyBagTemplate<T>::operator[](size_t index) const {
     if (index >= 0 && index < size) {
@@ -49,7 +116,8 @@ const T& MyBagTemplate<T>::operator[](size_t index) const {
     // Handle out-of-bounds access
     throw out_of_range("Index out of bounds");
 }
-
+//precondition: going to call the myBag (template)
+//postcondition: going to return the cout of the bag
 template<typename T>
 ostream& operator<<(ostream& out, const MyBagTemplate<T>& bag) {
     for (int i = 0; i < bag.size; ++i) {
@@ -57,9 +125,8 @@ ostream& operator<<(ostream& out, const MyBagTemplate<T>& bag) {
     }
     return out;
 }
-
-// Precondition: None
-// Postcondition: Adds value to the bag
+//precondition: going to call the myBag (template)
+//postcondition: going to then add the myBag (call the ensureCpacity() function)
 template<typename T>
 void MyBagTemplate<T>::add(double value) {
     if (size == capacity) {
@@ -67,9 +134,8 @@ void MyBagTemplate<T>::add(double value) {
     }
     data[size++] = value;
 }
-
-// Precondition: None
-// Postcondition: Clears bag
+//precondition: going to call the myBag (template)
+//postcondition: going to then clear the myBag (its going to be empty)
 template<typename T>
 void MyBagTemplate<T>::clear() {
     delete[] data;
@@ -77,9 +143,8 @@ void MyBagTemplate<T>::clear() {
     size = 0;
     capacity = 0;
 }
-
-// Precondition: newCapacity is a non-negative integer
-// Postcondition: The bag has a capacity of at least newCapacity
+//precondition: going to call the myBag (template)
+//postcondition: going to then check the ensure capacity the myBag
 template<typename T>
 void MyBagTemplate<T>::ensureCapacity(int newCapacity) {
     if (newCapacity > capacity) {
@@ -92,9 +157,8 @@ void MyBagTemplate<T>::ensureCapacity(int newCapacity) {
         capacity = newCapacity;
     }
 }
-
-// Precondition: None
-// Postcondition: Returns true if the value is in the bag, false otherwise
+//precondition: going to call the myBag (template)
+//postcondition: going to then check whats in the myBag
 template<typename T>
 bool MyBagTemplate<T>::contains(double value) const {
     for (int i = 0; i < size; i++) {
@@ -104,135 +168,128 @@ bool MyBagTemplate<T>::contains(double value) const {
     }
     return false;
 }
-
-// Precondition: None
-// Postcondition: Gives user a menu to interact with the bag
+//precondition: going to print the information in template form
+//postcondition: going to create a menu that accepts 
 template<typename T>
-void MyBagTemplate<T>::subMenu()
-{
-    do
-    {
-        system("cls");
-        cout << endl;
-        cout << "\t2> Template MyBag of doubles" << endl;
-        cout << "\t" << string(80, char(205)) << endl;
-        cout << "\t\t1> clear" << endl;
-        cout << "\t\t2> insert" << endl;
-        cout << "\t\t3> search" << endl;
-        cout << "\t\t4> remove" << endl;
-        cout << "\t\t5> sort" << endl;
-        cout << "\t\t6> display" << endl;
-        cout << "\n\t" << string(80, char(169));
-        cout << "\n\t0 > exit" << endl;
-        cout << "\t" << string(80, char(205)) << endl;
+void MyBagTemplate<T>::menuInformation() {
+    system("cls");
+    char option;
+    do {
+    beginning:
+        cout << "\n\t\t2> emplate MyBag<double> container";
+        cout << "\n\t\t" << string(82, char(205));
+        cout << "\n\t\t\tA> clear";
+        cout << "\n\t\t\tB> insert";
+        cout << "\n\t\t\tC> search";
+        cout << "\n\t\t\tD> remove";
+        cout << "\n\t\t\tE> sort";
+        cout << "\n\t\t\tF> display";
+        cout << "\n\t\t" << string(82, char(205));
+        cout << "\n\t\t\t0> return";
+        cout << "\n\t\t" << string(82, char(205)) << "\n";
+        option = inputChar("\t\t\tOption: ", (static_cast<string>("ABCDEF0")));
 
-        // get user input/option of main menu
-        int option = inputInteger("\n\tOption: ", 0, 6);
-
-        switch (option)
-        {
-        case 0: // Return to Main Menu
-        {
-            system("cls");
-            mainMenu();
-        } break;
-        case 1: // Clear MyBag
-        {
-            //check if MyBag is nullptr, if empty, send a warning
-            if (data == 0) {
-                cout << "\n\t\t\tMyBag is empty.\n\n";
-                break;
-            }
-
+        switch (toupper(option)) {
+        case 'A': {
             clear();
-            cout << "\nMy bag is cleared of all elements.\n\n";
-        } break;
-        case 2: // Insert a value to MyBag
-        {
-            double insertValue = (inputDouble("\nEnter a value and insert into MyBag: "));
-            add(insertValue);
-            cout << "\nValue " << insertValue << " has been inserted into MyBag.\n\n";
-        } break;
-        case 3: // Search
-        {
+            cout << "\n\t\t\tMy bag is cleared of all elements.";
+            cout << "\n\n";
+            system("pause");
+            system("cls");
+        }
+                break;
+        case 'B': {
+            double newValue = inputDouble("\n\t\t\tEnter a value and insert into MyBag: ");
+            add(newValue);
+            cout << "\n\t\t\tValue " << newValue << " has been inserted into MyBag.";
+            cout << "\n\n";
+            system("pause");
+            system("cls");
+        }
+                break;
+        case 'C': {
             //check if MyBag is nullptr, if empty, send a warning
             if (data == 0) {
                 cout << "\n\t\t\tMyBag is empty.\n\n";
-                break;
+                system("pause");
+                system("cls");
+                goto beginning;
             }
-
-            double findValue = (inputDouble("\nEnter a value to search from MyBag: "));
-
-            bool found = contains(findValue);
+            double search = inputInteger("\n\t\t\tEnter a value to search from MyBag: ");
+            bool found = contains(search);
 
             if (found) {
-                cout << "\nValue " << findValue << " is in MyBag.\n\n";
+                cout << "\n\t\t\tValue " << search << " is in MyBag.";
             }
             else {
-                cout << "\nValue " << findValue << " is not in MyBag.\n\n";
+                cout << "\n\t\t\tValue " << search << " is not in MyBag.";
             }
-
-        } break;
-        case 4: // Remove an element at index
-        {
+            cout << "\n\n";
+            system("pause");
+            system("cls");
+        }
+                break;
+        case 'D': {
             //check if MyBag is nullptr, if empty, send a warning
             if (data == 0) {
                 cout << "\n\t\t\tMyBag is empty.\n\n";
-                break;
+                system("pause");
+                system("cls");
+                goto beginning;
             }
-
-            int index = inputInteger("\nEnter an index to be deleted: ", 0, size - 1);
-            cout << endl;
-            if (index < 0 || index >= size)
-            {
-                cout << "Invalid index or index out of range.\n\n";
+            int index = inputInteger("\n\t\t\tEnter an index to be deleted: ", 0, size - 1);
+            cout << "\n";
+            if (index < 0 || index >= size) {
+                cout << "\n\t\t\tInvalid index or index out of range.";
             }
-            else
-            {
-                double removedValue = data[index];
+            else {
+                double removeValue = data[index];
                 for (int i = index; i < size - 1; i++) {
                     data[i] = data[i + 1];
                 }
                 size--;
-                cout << "Value " << removedValue << " at subscript " << index << " has been deleted.\n\n";
+                cout << "\n\t\t\tValue " << removeValue << " at subscript " << index << " has been deleted.";
             }
-        } break;
-        case 5: // Sort
-        {
-            //check if MyBag is nullptr, if empty, send a warning
-            if (data == 0) {
-                cout << "\n\t\t\tMyBag is empty.\n\n";
-                break;
-            }
-
-            sort(data, data + size);
-            cout << "\nMyBag has been sorted.\n\n";
-        } break;
-        case 6: // Display
-        {
-            //check if MyBag is nullptr, if empty, send a warning
-            if (data == 0) {
-                cout << "\n\t\t\tMyBag is empty.\n\n";
-                break;
-            }
-
-            cout << "\nMyBag:\n ";
-            for (int i = 0; i < size; i++)
-            {
-                cout << endl << "[" << i << "] - " << data[i] << " \n";
-            }
-
-            cout << endl << endl;
-        } break;
-        default:
-            cout << "Invalid option. Please enter a valid option.\n";
+            cout << "\n\n";
+            system("pause");
+            system("cls");
         }
-
-        // Pause display after every case
-        system("pause");
-
-        // New line
-        cout << "\n";
-
+                break;
+        case 'E': {
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                system("pause");
+                system("cls");
+                goto beginning;
+            }
+            sort(data, data + size);
+            cout << "\n\t\t\tMyBag has been sorted.";
+            cout << "\n\n";
+            system("pause");
+            system("cls");
+        }
+                break;
+        case 'F': {
+            //check if MyBag is nullptr, if empty, send a warning
+            if (data == 0) {
+                cout << "\n\t\t\tMyBag is empty.\n\n";
+                system("pause");
+                system("cls");
+                break;
+            }
+            cout << "\n\t\t\tMyBag: \n";
+            for (int i = 0; i < size; i++) {
+                cout << "\n\t\t\t[" << i << "] - " << data[i];
+            }
+            cout << "\n\n";
+            system("pause");
+            system("cls");
+        }
+                break;
+        case '0': {
+            system("cls"); mainMenu();
+        }
+        }
     } while (true);
 }

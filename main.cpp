@@ -53,7 +53,7 @@ void mainMenu()
         {
         case 0: exit(1); break;
         case 1: system("cls"); mybagObject.subMenu(); break;
-        case 2: system("cls"); myBagTemplateObject.subMenu(); break;
+        case 2: system("cls"); myBagTemplateObject.menuInformation(); break;
         case 3: system("cls"); courseObject.menuInformation(); break;
         }
 
