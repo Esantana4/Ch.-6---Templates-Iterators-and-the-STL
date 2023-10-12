@@ -196,7 +196,7 @@ void MyBagTemplate<T>::subMenu()
     {
         system("cls");
         cout << endl;
-        cout << "\t1> Template MyBag of doubles" << endl;
+        cout << "\t2> Template MyBag of doubles" << endl;
         cout << "\t" << string(80, char(205)) << endl;
         cout << "\t\t1> clear" << endl;
         cout << "\t\t2> insert" << endl;

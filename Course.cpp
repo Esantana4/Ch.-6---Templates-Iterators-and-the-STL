@@ -9,6 +9,7 @@ Course::Course(const string& courseName) : name(courseName) {}
 const string& Course::getName() const {
 	return name;
 }
+
 //precondition: going to get the new name
 //postcondition: going to set the private name with the new name member
 void Course::setName(const string newName) {
@@ -83,6 +84,7 @@ void Course::displayCourse() {
 	cout << "\n\n\t\t\tAverage score and grade: " << average << "(" << calculateGrade(average) << ")";
 	cout << '\n';
 }
+
 //precondition: going to print the information
 //postcondition: going to create a menu that accepts 
 void Course::menuInformation() {
