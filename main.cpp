@@ -4,20 +4,15 @@
  CPMR 131 - Professor Q
 
  Credit:
- Part 1: Non-template MyBag container of int - Erik Santana
- Part 2: Template MyBag<double> container - Thanh Tran
- Part 3: Application using MyBag container - Otoniel Torres Bernal
-
- Description:
- Part 1: This class uses a vector of integers to mimick a bag that grows and shrinks. MyBag can also be sorted, and searched through using the subscript.
- Part 2:
- Part 3:
+ Part 1: Non-template MyBag container of int - Christian Hernandez & Saul Merino
+ Part 2: Template MyBag<double> container - Thanh Tran & John Kim
+ Part 3: Application using MyBag container - Erik Santana & Joe Bryant & Otoniel Torres Bernal
  */
 
-//#include 
-//#include 
 #include "input.h"
 #include "MyBag.h"
+#include "MyBagTemplate.h"
+#include "Course.h"
 
 using namespace std;
 
@@ -35,6 +30,8 @@ int main()
 void mainMenu()
 {
     MyBag mybagObject;
+    MyBagTemplate<double> myBagTemplateObject;
+    Course courseObject;
 
     cout << endl;
     cout << "\tCMPR131 - Chapter 6: non-template and template Container by Erik Santana (10 / 4 / 23)";
@@ -56,8 +53,8 @@ void mainMenu()
         {
         case 0: exit(1); break;
         case 1: system("cls"); mybagObject.subMenu(); break;
-        case 2: system("cls"); ; break;
-        case 3: system("cls"); ; break;
+        case 2: system("cls"); myBagTemplateObject.subMenu(); break;
+        case 3: system("cls"); courseObject.menuInformation(); break;
         }
 
         // new line
