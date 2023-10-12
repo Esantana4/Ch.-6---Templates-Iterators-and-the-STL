@@ -42,12 +42,7 @@ public:
 	void setSize(int newSize);
 	//void setCapacity(int newCapacity);
 
-	//member functions to clear, insert, search, remove, sort, and display
-	void clearMyBag();
-	void insertMyBag(const T& insert);
-	bool searchMyBag(const T& search) const;
-	bool removeMyBag(const T& remove);
-	void sortMyBag();
+	// Menu
 	void subMenu();
 
 	//overloading operators

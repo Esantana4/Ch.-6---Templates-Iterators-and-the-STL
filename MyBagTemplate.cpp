@@ -29,66 +29,6 @@ void MyBagTemplate<T>::setSize(int newSize) {
 }
 
 template<typename T>
-void MyBagTemplate<T>::clearMyBag() {
-    delete[] data;
-    data = nullptr;
-    size = 0;
-    capacity = 0;
-}
-
-template<typename T>
-void MyBagTemplate<T>::insertMyBag(const T& insert) {
-    if (size >= capacity) {
-        int newCapacity = (capacity == 0) ? 1 : capacity * 2;
-        T* newData = new T[newCapacity];
-
-        for (int i = 0; i < size; ++i) {
-            newData[i] = data[i];
-        }
-        //deallocate the memory so it does not leak
-        delete[] data;
-        data = newData;
-        capacity = newCapacity;
-    }
-    data[size++] = insert;
-}
-
-
-template<typename T>
-bool MyBagTemplate<T>::searchMyBag(const T& search) const {
-    for (int i = 0; i < size; ++i) {
-        if (data[i] == search) {
-            return true;
-        }
-    }
-    return false;
-}
-
-template<typename T>
-bool MyBagTemplate<T>::removeMyBag(const T& remove) {
-    int index = -1;
-    for (int i = 0; i < size; ++i) {
-        if (data[i] == remove) {
-            index = i;
-            break;
-        }
-    }
-    if (index != -1) {
-        for (int i = index; i < size - 1; ++i) {
-            data[i] = data[i + 1];
-        }
-        size--;
-        return true;
-    }
-    return false;
-}
- 
-template<typename T>
-void MyBagTemplate<T>::sortMyBag() {
-    sort(data, data + size);
-}
-
-template<typename T>
 bool MyBagTemplate<T>::operator<(const MyBagTemplate<T>& obj) const {
     return size < obj.size;
 }
@@ -118,6 +58,8 @@ ostream& operator<<(ostream& out, const MyBagTemplate<T>& bag) {
     return out;
 }
 
+// Precondition: None
+// Postcondition: Adds value to the bag
 template<typename T>
 void MyBagTemplate<T>::add(double value) {
     if (size == capacity) {
@@ -126,6 +68,8 @@ void MyBagTemplate<T>::add(double value) {
     data[size++] = value;
 }
 
+// Precondition: None
+// Postcondition: Clears bag
 template<typename T>
 void MyBagTemplate<T>::clear() {
     delete[] data;
@@ -134,6 +78,8 @@ void MyBagTemplate<T>::clear() {
     capacity = 0;
 }
 
+// Precondition: newCapacity is a non-negative integer
+// Postcondition: The bag has a capacity of at least newCapacity
 template<typename T>
 void MyBagTemplate<T>::ensureCapacity(int newCapacity) {
     if (newCapacity > capacity) {
@@ -147,6 +93,8 @@ void MyBagTemplate<T>::ensureCapacity(int newCapacity) {
     }
 }
 
+// Precondition: None
+// Postcondition: Returns true if the value is in the bag, false otherwise
 template<typename T>
 bool MyBagTemplate<T>::contains(double value) const {
     for (int i = 0; i < size; i++) {
@@ -157,6 +105,8 @@ bool MyBagTemplate<T>::contains(double value) const {
     return false;
 }
 
+// Precondition: None
+// Postcondition: Gives user a menu to interact with the bag
 template<typename T>
 void MyBagTemplate<T>::subMenu()
 {
